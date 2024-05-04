@@ -46,17 +46,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddBooks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AddBooks.Designer.cs">
+      <DependentUpon>AddBooks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="IssuedBooks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IssuedBooks.Designer.cs">
+      <DependentUpon>IssuedBooks.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,11 +90,29 @@
     <Compile Include="RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReturnBooks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReturnBooks.Designer.cs">
+      <DependentUpon>ReturnBooks.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AddBooks.resx">
+      <DependentUpon>AddBooks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IssuedBooks.resx">
+      <DependentUpon>IssuedBooks.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -84,6 +126,9 @@
     </Compile>
     <EmbeddedResource Include="RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnBooks.resx">
+      <DependentUpon>ReturnBooks.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -99,9 +144,34 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\icons8_books_60px_3.png" />
+    <Content Include="Assets\icons8_book_100px_1.png" />
+    <Content Include="Assets\icons8_book_32px.png" />
+    <Content Include="Assets\icons8_book_32px_1.png" />
+    <Content Include="Assets\icons8_book_60px_2.png" />
+    <Content Include="Assets\icons8_book_stack_60px.png" />
+    <Content Include="Assets\icons8_dashboard_32px.png" />
     <Content Include="Assets\icons8_library_100px.png" />
+    <Content Include="Assets\icons8_logout_rounded_up_filled_20px.png" />
+    <Content Include="Assets\icons8_logout_rounded_up_filled_32px.png" />
+    <Content Include="Assets\icons8_return_32px_3.png" />
+    <Content Include="Assets\pexels-polina-zimmerman-3747468.jpg" />
     <Content Include="Database\SQLQuery1.sql" />
+    <None Include="Resources\icons8_return_32px_3.png" />
+    <None Include="Resources\icons8_logout_rounded_up_filled_32px.png" />
+    <None Include="Resources\icons8_logout_rounded_up_filled_20px.png" />
+    <None Include="Resources\icons8_dashboard_32px.png" />
+    <None Include="Resources\icons8_books_60px_3.png" />
+    <None Include="Resources\icons8_book_stack_60px.png" />
+    <None Include="Resources\icons8_book_100px_1.png" />
+    <None Include="Resources\icons8_book_60px_2.png" />
+    <None Include="Resources\icons8_book_32px_1.png" />
+    <None Include="Resources\icons8_book_32px.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>if exist "$(TargetPath).locked" del "$(TargetPath).locked"
+if exist "$(TargetPath)" if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"</PreBuildEvent>
+  </PropertyGroup>
 </Project>

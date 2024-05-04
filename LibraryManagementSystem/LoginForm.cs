@@ -57,6 +57,10 @@ namespace LibraryManagementSystem
                             if (table.Rows.Count >= 1)
                             {
                                 MessageBox.Show("Login Successfully", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                MainForm mForm = new MainForm();
+                                mForm.Show();
+                                this.Hide();
                             }
                             else
                             {
