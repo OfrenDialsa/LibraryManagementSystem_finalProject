@@ -65,14 +65,15 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Tahoma", 14F);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(12, 11);
+            this.label2.Location = new System.Drawing.Point(4, 11);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(464, 29);
+            this.label2.Size = new System.Drawing.Size(455, 29);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Library Management System || Main Form";
+            this.label2.Text = "Library Management System | Main Form";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
             // 
@@ -144,7 +145,7 @@
             this.returnBooks_btn.ForeColor = System.Drawing.Color.White;
             this.returnBooks_btn.Image = global::LibraryManagementSystem.Properties.Resources.icons8_return_32px_3;
             this.returnBooks_btn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.returnBooks_btn.Location = new System.Drawing.Point(28, 518);
+            this.returnBooks_btn.Location = new System.Drawing.Point(29, 475);
             this.returnBooks_btn.Margin = new System.Windows.Forms.Padding(4);
             this.returnBooks_btn.Name = "returnBooks_btn";
             this.returnBooks_btn.Size = new System.Drawing.Size(287, 74);
@@ -162,7 +163,7 @@
             this.issueBooks_btn.ForeColor = System.Drawing.Color.White;
             this.issueBooks_btn.Image = global::LibraryManagementSystem.Properties.Resources.icons8_book_32px_1;
             this.issueBooks_btn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.issueBooks_btn.Location = new System.Drawing.Point(28, 437);
+            this.issueBooks_btn.Location = new System.Drawing.Point(29, 394);
             this.issueBooks_btn.Margin = new System.Windows.Forms.Padding(4);
             this.issueBooks_btn.Name = "issueBooks_btn";
             this.issueBooks_btn.Size = new System.Drawing.Size(287, 74);
@@ -180,7 +181,7 @@
             this.addBooks_btn.ForeColor = System.Drawing.Color.White;
             this.addBooks_btn.Image = global::LibraryManagementSystem.Properties.Resources.icons8_book_32px;
             this.addBooks_btn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.addBooks_btn.Location = new System.Drawing.Point(28, 356);
+            this.addBooks_btn.Location = new System.Drawing.Point(29, 313);
             this.addBooks_btn.Margin = new System.Windows.Forms.Padding(4);
             this.addBooks_btn.Name = "addBooks_btn";
             this.addBooks_btn.Size = new System.Drawing.Size(287, 74);
@@ -198,7 +199,7 @@
             this.dashboard_btn.ForeColor = System.Drawing.Color.White;
             this.dashboard_btn.Image = global::LibraryManagementSystem.Properties.Resources.icons8_dashboard_32px;
             this.dashboard_btn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.dashboard_btn.Location = new System.Drawing.Point(28, 275);
+            this.dashboard_btn.Location = new System.Drawing.Point(29, 232);
             this.dashboard_btn.Margin = new System.Windows.Forms.Padding(4);
             this.dashboard_btn.Name = "dashboard_btn";
             this.dashboard_btn.Size = new System.Drawing.Size(287, 74);
@@ -212,7 +213,7 @@
             this.greet_label.AutoSize = true;
             this.greet_label.Font = new System.Drawing.Font("Tahoma", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.greet_label.ForeColor = System.Drawing.Color.White;
-            this.greet_label.Location = new System.Drawing.Point(56, 173);
+            this.greet_label.Location = new System.Drawing.Point(59, 173);
             this.greet_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.greet_label.Name = "greet_label";
             this.greet_label.Size = new System.Drawing.Size(223, 34);
@@ -222,7 +223,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::LibraryManagementSystem.Properties.Resources.icons8_library_100px;
-            this.pictureBox1.Location = new System.Drawing.Point(86, 26);
+            this.pictureBox1.Location = new System.Drawing.Point(88, 26);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(163, 143);
