@@ -10,8 +10,10 @@ using System.Windows.Forms;
 
 namespace LibraryManagementSystem
 {
+    
     public partial class MainForm : Form
     {
+        string num = "yes";
         public MainForm()
         {
             InitializeComponent();
@@ -20,6 +22,9 @@ namespace LibraryManagementSystem
         private void label1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)

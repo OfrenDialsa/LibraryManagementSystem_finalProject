@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 
 namespace LibraryManagementSystem
 {
@@ -58,11 +59,11 @@ namespace LibraryManagementSystem
                             } else
                             {
                                 //Untuk mendapatkan data tanggal hari ini
-                                DateTime day = DateTime.Today;
-
+                                DateTime day = DateTime.Now;
                                 string insertData = "insert into users (email, username, password, date_register) " + "values (@email, @username, @password, @date)";
+                                //string insertData = "insert into users (email, username, password) " + "values (@email, @username, @password)";
                                 using (SqlCommand insertCMD = new SqlCommand(insertData, connect))
-                                {
+                                { 
                                     insertCMD.Parameters.AddWithValue("@email", register_email.Text.Trim());
                                     insertCMD.Parameters.AddWithValue("@username", register_username.Text.Trim());
                                     insertCMD.Parameters.AddWithValue("@password", register_password.Text.Trim());

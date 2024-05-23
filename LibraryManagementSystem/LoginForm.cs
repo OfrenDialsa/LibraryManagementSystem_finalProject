@@ -32,6 +32,7 @@ namespace LibraryManagementSystem
 
         private void button1_Click(object sender, EventArgs e)
         {
+            connect.Open();
             if (login_username.Text == "" || login_password.Text == "")
             {
                 MessageBox.Show("Please fill all blank field", "Error Massage", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -64,7 +65,7 @@ namespace LibraryManagementSystem
                             }
                             else
                             {
-                                MessageBox.Show("Incorrect Username/Password", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Nama atau password salah", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
