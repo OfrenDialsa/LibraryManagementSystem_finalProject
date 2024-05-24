@@ -129,7 +129,7 @@ namespace LibraryManagementSystem
         public void displayBooks()
         {
             DataAddBooks dab = new DataAddBooks();
-            List<DataAddBooks> listData = dab.addBooksData();
+            List<DataAddBooks> listData = dab.AddBooksData();
 
             dataGridView1.DataSource = listData;
 

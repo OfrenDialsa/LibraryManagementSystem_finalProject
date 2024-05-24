@@ -9,9 +9,9 @@ using System.Data.SqlClient;
 
 namespace LibraryManagementSystem
 {
-    internal class DataAddBooks
+    class DataAddBooks
     {
-        SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Project Kuliah\Pvisual\Tugas Akhir\Tugas final\LibraryManagementSystem\LibraryManagementSystem\Database\library.mdf;Integrated Security=True;Connect Timeout=30;Encrypt=True");
+        SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Project Kuliah\Pvisual\Tugas Akhir\Tugas final\LibraryManagementSystem\LibraryManagementSystem\Database\library.mdf;Integrated Security=True;Connect Timeout=30;");
         public int ID { set; get; }
         public string BookTitle { set; get; }
         public string Author { set; get; }
@@ -19,7 +19,7 @@ namespace LibraryManagementSystem
         public string Image { set; get; }
         public string Status { set; get; }
 
-        public List<DataAddBooks> addBooksData()
+        public List<DataAddBooks> AddBooksData()
         {
             List<DataAddBooks> listData = new List<DataAddBooks>();
 
@@ -33,6 +33,7 @@ namespace LibraryManagementSystem
 
                     using (SqlCommand cmd = new SqlCommand(selectData, connect))
                     {
+                        
                         SqlDataReader reader = cmd.ExecuteReader();
                        
 

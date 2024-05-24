@@ -32,7 +32,6 @@ namespace LibraryManagementSystem
 
         private void button1_Click(object sender, EventArgs e)
         {
-            connect.Open();
             if (login_username.Text == "" || login_password.Text == "")
             {
                 MessageBox.Show("Please fill all blank field", "Error Massage", MessageBoxButtons.OK, MessageBoxIcon.Error);
