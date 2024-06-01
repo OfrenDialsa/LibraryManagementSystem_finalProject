@@ -176,11 +176,39 @@ namespace LibraryManagementSystem
             {
                 if(connect.State != ConnectionState.Open)
                 {
+                    DialogResult check = MessageBox.Show("Are you sure you want to UPDATE Book ID" 
+                        + bookID + "?", "Configuration Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if(check == DialogResult.Yes)
+                    {
+
+                    }
+
                     try
                     {
                         connect.Open();
                         DateTime today = DateTime.Today;
-                        string updateData = "UPDATE books SET book_title";
+                        string updateData = "UPDATE books SET book_title = @bookTitle" +
+                            ",author = @author, published_date = @published_date" + 
+                            ",status = @status, date_update = @date_update WHERE id = @id ";
+
+                        using (SqlCommand cmd = new SqlCommand(updateData, connect))
+                        {
+                            cmd.Parameters.AddWithValue("@bookTitle", addBooks_bookTitle.Text.Trim());
+                            cmd.Parameters.AddWithValue("@author", addBooks_author.Text.Trim());
+                            cmd.Parameters.AddWithValue("@published_date", addBooks_published.Value);
+                            cmd.Parameters.AddWithValue("@status", addBooks_status.Text.Trim());
+                            cmd.Parameters.AddWithValue("@date_update", today);
+                            cmd.Parameters.AddWithValue("@id", bookID);
+
+                            cmd.ExecuteNonQuery();
+
+                            displayBooks();
+
+                            MessageBox.Show("Update successfully!", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            clearFields();
+                        }
                     }
                     catch(Exception ex)
                     {
@@ -191,6 +219,70 @@ namespace LibraryManagementSystem
                     {
                         connect.Close();
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Cancelled.", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        private void addBooks_deleteBtn_Click(object sender, EventArgs e)
+        {
+            if (addBooks_picture.Image == null
+                || addBooks_bookTitle.Text == ""
+                || addBooks_author.Text == ""
+                || addBooks_published.Value == null
+                || addBooks_status.Text == ""
+                || addBooks_picture.Image == null)
+            {
+                MessageBox.Show("Please select item first", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                if (connect.State != ConnectionState.Open)
+                {
+                    DialogResult check = MessageBox.Show("Are you sure you want to DELETE Book ID"
+                        + bookID + "?", "Configuration Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (check == DialogResult.Yes)
+                    {
+
+                    }
+
+                    try
+                    {
+                        connect.Open();
+                        DateTime today = DateTime.Today;
+                        string updateData = "UPDATE books SET date_delete = @date_delete WHERE id = @id";
+
+                        using (SqlCommand cmd = new SqlCommand(updateData, connect))
+                        {
+                            cmd.Parameters.AddWithValue("@date_delete", today);
+                            cmd.Parameters.AddWithValue("@id", bookID);
+
+                            cmd.ExecuteNonQuery();
+
+                            displayBooks();
+
+                            MessageBox.Show("Deleted successfully!", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            clearFields();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+                    finally
+                    {
+                        connect.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Cancelled.", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
