@@ -53,7 +53,8 @@ namespace LibraryManagementSystem
                         reader.Close();
                     }
 
-                    }catch(Exception ex)
+                }
+                catch(Exception ex)
                 {
                     Console.WriteLine("Error connecting Database: " + ex);
                 }
