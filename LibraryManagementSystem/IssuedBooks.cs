@@ -9,14 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.SqlClient;
-using System.Runtime.Remoting.Contexts;
-using System.Net;
 
 namespace LibraryManagementSystem
 {
     public partial class IssuedBooks : UserControl
     {
-        SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Project Kuliah\Pvisual\Tugas Akhir\Tugas final\LibraryManagementSystem\LibraryManagementSystem\Database\library.mdf;Integrated Security=True;Connect Timeout=30");
+        SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Project Kuliah\Pvisual\Tugas Akhir\Tugas final\LibraryManagementSystem\LibraryManagementSystem\Database\library.mdf;Integrated Security=True;Connect Timeout=30;encrypt=false;");
         public IssuedBooks()
         {
             InitializeComponent();
@@ -25,103 +23,39 @@ namespace LibraryManagementSystem
             displayBookIssueData();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public void refreshData()
         {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(connect.State != ConnectionState.Open)
+            if (InvokeRequired)
             {
-                if (bookIssue_bookTitle.SelectedValue != null)
-                {
-                    DataRowView selectedRow = (DataRowView)bookIssue_bookTitle.SelectedItem;
-                    int selectID = Convert.ToInt32(selectedRow["id"]);
-
-                    try
-                    {
-                        connect.Open();
-
-                        string selectData = "SELECT * FROM books WHERE id = @id";
-
-                        using (SqlCommand cmd = new SqlCommand(selectData, connect))
-                        {
-                            cmd.Parameters.AddWithValue("@id", selectID);
-
-                            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                            DataTable table = new DataTable();
-                            adapter.Fill(table);
-
-                            if (table.Rows.Count > 0)
-                            {
-                                bookIssue_author.Text = table.Rows[0]["author"].ToString();
-
-                                string imagePath = table.Rows[8].ToString();
-
-                                if (imagePath != null)
-                                {
-                                    bookIssue_picture.Image = Image.FromFile(imagePath);
-                                }
-                                else
-                                {
-                                    bookIssue_picture.Image = null;
-                                }
-                            }
-
-                            bookIssue_author.DataSource = table;
-                            bookIssue_author.DisplayMember = "author";
-                            bookIssue_author.ValueMember = "id";
-
-                            string getImage = table.Rows[8].ToString();
-
-                            bookIssue_picture.Image = Image.FromFile(getImage);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-
-                    }
-                    finally
-                    {
-
-                    }
-                }
+                Invoke((MethodInvoker)refreshData);
+                return;
             }
+
+
+            DataBookTitle();
+            displayBookIssueData();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        public void displayBookIssueData()
-        {
-            DataIssueBooks dib = new DataIssueBooks();
-            List<DataIssueBooks> listData = dib.IssueBooksData();
-
-            dataGridView1.DataSource = listData;
-
-        }
+        
 
         private void bookIssue_addBtn_Click(object sender, EventArgs e)
         {
-            if(bookIssue_id.Text == "" 
-                || bookIssue_name.Text == "" 
+            if (bookIssue_id.Text == ""
+                || bookIssue_name.Text == ""
                 || bookIssue_contact.Text == ""
                 || bookIssue_email.Text == ""
                 || bookIssue_bookTitle.Text == ""
-                || bookIssue_author.Text == "" 
+                || bookIssue_author.Text == ""
                 || bookIssue_issueDate.Value == null
                 || bookIssue_returnDate.Value == null
-                || bookIssue_status.Text == "" 
+                || bookIssue_status.Text == ""
                 || bookIssue_picture.Image == null)
             {
                 MessageBox.Show("Please fill all blank fields", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                if(connect.State != ConnectionState.Open)
+                if (connect.State != ConnectionState.Open)
                 {
                     try
                     {
@@ -129,18 +63,19 @@ namespace LibraryManagementSystem
                         connect.Open();
 
                         string insertData = "INSERT INTO issues " +
-                            "(issues_id, full_name, contact, email, book_title " +
-                            ", author, status, issue_date, return_date, date_insert)" +
-                            "VALUES (@issueID, @fullname, @contact, @email, @bookTitle," +
-                            ", @status, @issueDate, @returnDate, @dateInsert)";
+                            "(issue_id, full_name, contact, email, book_title" +
+                            ",author, status, issue_date, return_date, date_insert)" +
+                            "VALUES (@issueID, @fullname, @contact, @email, @bookTitle" +
+                            ",@author , @status, @issueDate, @returnDate, @dateInsert)";
 
-                        using(SqlCommand cmd = new SqlCommand(insertData, connect))
+                        using (SqlCommand cmd = new SqlCommand(insertData, connect))
                         {
                             cmd.Parameters.AddWithValue("@issueID", bookIssue_id.Text.Trim());
                             cmd.Parameters.AddWithValue("@fullname", bookIssue_name.Text.Trim());
                             cmd.Parameters.AddWithValue("@contact", bookIssue_contact.Text.Trim());
                             cmd.Parameters.AddWithValue("@email", bookIssue_email.Text.Trim());
                             cmd.Parameters.AddWithValue("@bookTitle", bookIssue_bookTitle.Text.Trim());
+                            cmd.Parameters.AddWithValue("@author", bookIssue_author.Text.Trim());
                             cmd.Parameters.AddWithValue("@status", bookIssue_status.Text.Trim());
                             cmd.Parameters.AddWithValue("@issueDate", bookIssue_issueDate.Value);
                             cmd.Parameters.AddWithValue("@returnDate", bookIssue_returnDate.Value);
@@ -155,7 +90,7 @@ namespace LibraryManagementSystem
                             clearfields();
                         }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         MessageBox.Show("Error: " + ex, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -179,9 +114,23 @@ namespace LibraryManagementSystem
             bookIssue_picture.Image = null;
         }
 
+        public void displayBookIssueData()
+        {
+            DataIssueBooks dib = new DataIssueBooks();
+            List<DataIssueBooks> listData = dib.IssueBooksData();
+
+            dataGridView1.DataSource = listData;
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
         public void DataBookTitle()
         {
-            if(connect.State == ConnectionState.Closed)
+            if (connect.State == ConnectionState.Closed)
             {
                 try
                 {
@@ -210,12 +159,64 @@ namespace LibraryManagementSystem
                     connect.Close();
                 }
             }
-            
+
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(e.RowIndex != -1)
+            if(connect.State != ConnectionState.Open)
+            {
+                if (bookIssue_bookTitle.SelectedValue != null)
+                {
+                    DataRowView selectedRow = (DataRowView)bookIssue_bookTitle.SelectedItem;
+                    int selectID = Convert.ToInt32(selectedRow["id"]);
+
+                    try
+                    {
+                        connect.Open();
+
+                        string selectData = "SELECT * FROM books WHERE id = @id";
+
+                        using (SqlCommand cmd = new SqlCommand(selectData, connect))
+                        {
+                            cmd.Parameters.AddWithValue("@id", selectID);
+
+                            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                            DataTable table = new DataTable();
+                            adapter.Fill(table);
+
+                            if (table.Rows.Count > 0)
+                            {
+                                bookIssue_author.Text = table.Rows[0]["author"].ToString();
+
+                                string imagePath = table.Rows[0]["image"].ToString();
+
+                                if (imagePath != null)
+                                {
+                                    bookIssue_picture.Image = Image.FromFile(imagePath);
+                                }
+                                else
+                                {
+                                    bookIssue_picture.Image = null;
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    } 
+                    finally
+                    {
+                        connect.Close();
+                    }
+                }
+            }
+        }
+
+        private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
                 bookIssue_id.Text = row.Cells[1].Value.ToString();
@@ -230,6 +231,7 @@ namespace LibraryManagementSystem
 
             }
         }
+
 
         private void bookIssue_updateBtn_Click(object sender, EventArgs e)
         {
@@ -255,55 +257,54 @@ namespace LibraryManagementSystem
 
                     if (check == DialogResult.Yes)
                     {
-
-                    }
-
-                    try
-                    {
-                        connect.Open();
-                        DateTime today = DateTime.Today;
-                        string updateData = "UPDATE issues SET full_name = @fullname" +
-                            ",contact = @contact, email = @email" +
-                            ",book_title = @bookTitle, author = @author, status = @status" +
-                            ", issue_date = @issueDate, return_date = @returnDate, date_update = @dateUpdate WHERE issue_id = @issueID ";
-
-                        using (SqlCommand cmd = new SqlCommand(updateData, connect))
+                        try
                         {
-                            cmd.Parameters.AddWithValue("@fullname", bookIssue_name.Text.Trim());
-                            cmd.Parameters.AddWithValue("@contact", bookIssue_contact.Text.Trim());
-                            cmd.Parameters.AddWithValue("@email", bookIssue_email.Text.Trim());
-                            cmd.Parameters.AddWithValue("@bookTitle", bookIssue_bookTitle.Text.Trim());
-                            cmd.Parameters.AddWithValue("@author", bookIssue_author.Text.Trim());
-                            cmd.Parameters.AddWithValue("@status", bookIssue_status.Text.Trim());
-                            cmd.Parameters.AddWithValue("@issueDate", bookIssue_issueDate.Value);
-                            cmd.Parameters.AddWithValue("@returnDate", bookIssue_returnDate.Value);
-                            cmd.Parameters.AddWithValue("@dateUpdate", today);
-                            cmd.Parameters.AddWithValue("@issueID", bookIssue_id.Text.Trim());
+                            connect.Open();
+                            DateTime today = DateTime.Today;
+                            string updateData = "UPDATE issues SET full_name = @fullname" +
+                                ",contact = @contact, email = @email" +
+                                ",book_title = @bookTitle, author = @author, status = @status" +
+                                ", issue_date = @issueDate, return_date = @returnDate, date_update = @dateUpdate WHERE issue_id = @issueID ";
 
-                            cmd.ExecuteNonQuery();
+                            using (SqlCommand cmd = new SqlCommand(updateData, connect))
+                            {
+                                cmd.Parameters.AddWithValue("@fullname", bookIssue_name.Text.Trim());
+                                cmd.Parameters.AddWithValue("@contact", bookIssue_contact.Text.Trim());
+                                cmd.Parameters.AddWithValue("@email", bookIssue_email.Text.Trim());
+                                cmd.Parameters.AddWithValue("@bookTitle", bookIssue_bookTitle.Text.Trim());
+                                cmd.Parameters.AddWithValue("@author", bookIssue_author.Text.Trim());
+                                cmd.Parameters.AddWithValue("@status", bookIssue_status.Text.Trim());
+                                cmd.Parameters.AddWithValue("@issueDate", bookIssue_issueDate.Value);
+                                cmd.Parameters.AddWithValue("@returnDate", bookIssue_returnDate.Value);
+                                cmd.Parameters.AddWithValue("@dateUpdate", today);
+                                cmd.Parameters.AddWithValue("@issueID", bookIssue_id.Text.Trim());
 
-                            displayBookIssueData();
+                                cmd.ExecuteNonQuery();
 
-                            MessageBox.Show("Updated Successfully", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                displayBookIssueData();
 
-                            clearfields();
+                                MessageBox.Show("Updated Successfully", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                clearfields();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: " + ex, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                        finally
+                        {
+                            connect.Close();
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("Error: " + ex, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                        MessageBox.Show("Cancelled.", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
-                    finally
-                    {
-                        connect.Close();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Cancelled.", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+                
         }
 
         private void bookIssue_deleteBtn_Click(object sender, EventArgs e)
@@ -330,43 +331,42 @@ namespace LibraryManagementSystem
 
                     if (check == DialogResult.Yes)
                     {
-
-                    }
-
-                    try
-                    {
-                        connect.Open();
-                        DateTime today = DateTime.Today;
-                        string updateData = "UPDATE issues SET date_delete = @dateDelete WHERE issue_id = @issueID";
-
-                        using (SqlCommand cmd = new SqlCommand(updateData, connect))
+                        try
                         {
-                            cmd.Parameters.AddWithValue("@dateDelete", today);
-                            cmd.Parameters.AddWithValue("@issueID", bookIssue_id.Text.Trim());
+                            connect.Open();
+                            DateTime today = DateTime.Today;
+                            string updateData = "UPDATE issues SET date_delete = @dateDelete WHERE issue_id = @issueID";
 
-                            cmd.ExecuteNonQuery();
+                            using (SqlCommand cmd = new SqlCommand(updateData, connect))
+                            {
+                                cmd.Parameters.AddWithValue("@dateDelete", today);
+                                cmd.Parameters.AddWithValue("@issueID", bookIssue_id.Text.Trim());
 
-                            displayBookIssueData();
+                                cmd.ExecuteNonQuery();
 
-                            MessageBox.Show("Deleted Successfully", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                displayBookIssueData();
 
-                            clearfields();
+                                MessageBox.Show("Deleted Successfully", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                clearfields();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: " + ex, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                        finally
+                        {
+                            connect.Close();
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("Error: " + ex, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                        MessageBox.Show("Cancelled.", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
 
-                    }
-                    finally
-                    {
-                        connect.Close();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Cancelled.", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
             }
         }
 
@@ -374,5 +374,13 @@ namespace LibraryManagementSystem
         {
             clearfields();
         }
+
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+       
     }
 }

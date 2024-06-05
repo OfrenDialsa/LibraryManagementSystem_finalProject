@@ -1,4 +1,7 @@
-﻿namespace LibraryManagementSystem
+﻿using System;
+using System.Windows.Forms;
+
+namespace LibraryManagementSystem
 {
     partial class IssuedBooks
     {
@@ -74,7 +77,10 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.Location = new System.Drawing.Point(18, 59);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
@@ -82,7 +88,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(832, 242);
             this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick_1);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // label1
@@ -397,11 +403,12 @@
 
         }
 
+        
+
         #endregion
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox bookIssue_email;
         private System.Windows.Forms.Label label5;
@@ -426,5 +433,6 @@
         private System.Windows.Forms.Button bookIssue_addBtn;
         private System.Windows.Forms.ComboBox bookIssue_status;
         private System.Windows.Forms.Label label10;
+        private DataGridView dataGridView1;
     }
 }

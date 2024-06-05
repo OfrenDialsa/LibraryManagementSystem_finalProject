@@ -33,7 +33,7 @@ namespace LibraryManagementSystem
                 {
                     connect.Open();
 
-                    string selectData = "SELECT * FROM issuses WHERE date_delete IS Null";
+                    string selectData = "SELECT * FROM issues WHERE date_delete IS Null";
 
                     using(SqlCommand cmd = new SqlCommand(selectData, connect))
                     {
@@ -64,7 +64,7 @@ namespace LibraryManagementSystem
                 }
                 finally
                 {
-
+                    connect.Close();
                 }
             }
             return listData;
