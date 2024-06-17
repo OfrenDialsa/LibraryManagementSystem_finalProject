@@ -23,16 +23,13 @@ namespace LibraryManagementSystem
             displayBookIssueData();
         }
 
-        public void refreshData()
+        public void RefreshData()
         {
             if (InvokeRequired)
             {
-                Invoke((MethodInvoker)refreshData);
+                Invoke((MethodInvoker)RefreshData);
                 return;
             }
-
-
-            DataBookTitle();
             displayBookIssueData();
         }
 

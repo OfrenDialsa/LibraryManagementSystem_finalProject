@@ -30,6 +30,12 @@ namespace LibraryManagementSystem
             addBooks1.Visible = true;
             returnBooks1.Visible = false;
             issuedBooks1.Visible = false;
+
+            AddBooks aform = addBooks1 as AddBooks;
+            if (aform != null) 
+            {
+                aform.RefreshData();
+            }
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -55,6 +61,12 @@ namespace LibraryManagementSystem
             addBooks1.Visible= false;
             returnBooks1.Visible = false;
             issuedBooks1.Visible= false;
+
+            Dashboard dform = dashboard1 as Dashboard;
+            if (dform != null)
+            {
+                dform.RefreshData();
+            }
         }
 
         private void issueBooks_btn_Click(object sender, EventArgs e)
@@ -63,6 +75,12 @@ namespace LibraryManagementSystem
             addBooks1.Visible = false;
             returnBooks1.Visible = false;
             issuedBooks1.Visible = true;
+
+            ReturnBooks rform = returnBooks1 as ReturnBooks;
+            if (rform != null)
+            {
+                rform.RefreshData();
+            }
         }
 
         private void returnBooks_btn_Click(object sender, EventArgs e)
@@ -71,6 +89,12 @@ namespace LibraryManagementSystem
             addBooks1.Visible = false;
             returnBooks1.Visible = true;
             issuedBooks1.Visible = false;
+
+            IssuedBooks iform = issuedBooks1 as IssuedBooks;
+            if (iform != null)
+            {
+                iform.RefreshData();
+            }
         }
 
         private void dashboard1_Load(object sender, EventArgs e)

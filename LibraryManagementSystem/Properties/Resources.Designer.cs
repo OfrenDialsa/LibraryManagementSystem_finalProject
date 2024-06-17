@@ -63,6 +63,16 @@ namespace LibraryManagementSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _24manguel_superJumbo {
+            get {
+                object obj = ResourceManager.GetObject("24manguel-superJumbo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_book_100px_1 {
             get {
                 object obj = ResourceManager.GetObject("icons8_book_100px_1", resourceCulture);
@@ -166,6 +176,26 @@ namespace LibraryManagementSystem.Properties {
         internal static System.Drawing.Bitmap icons8_return_32px_3 {
             get {
                 object obj = ResourceManager.GetObject("icons8_return_32px_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap libraries {
+            get {
+                object obj = ResourceManager.GetObject("libraries", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shutterstock_83045623_e1555360482941 {
+            get {
+                object obj = ResourceManager.GetObject("shutterstock_83045623-e1555360482941", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

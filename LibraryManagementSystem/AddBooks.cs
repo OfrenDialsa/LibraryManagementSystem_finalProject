@@ -27,6 +27,16 @@ namespace LibraryManagementSystem
 
         }
 
+        public void RefreshData()
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)RefreshData);
+                return;
+            }
+            displayBooks();
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             clearFields();
@@ -285,6 +295,11 @@ namespace LibraryManagementSystem
                     MessageBox.Show("Cancelled.", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -178,6 +178,9 @@
     <Content Include="Assets\icons8_return_32px_3.png" />
     <Content Include="Assets\pexels-polina-zimmerman-3747468.jpg" />
     <Content Include="Database\SQLQuery1.sql" />
+    <None Include="Resources\shutterstock_83045623-e1555360482941.jpg" />
+    <None Include="Resources\libraries.jpg" />
+    <None Include="Resources\24manguel-superJumbo.jpg" />
     <None Include="Resources\icons8_return_32px_3.png" />
     <None Include="Resources\icons8_logout_rounded_up_filled_32px.png" />
     <None Include="Resources\icons8_logout_rounded_up_filled_20px.png" />

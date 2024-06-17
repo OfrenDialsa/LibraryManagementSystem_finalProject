@@ -70,9 +70,9 @@
             this.label2.Location = new System.Drawing.Point(4, 11);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(455, 29);
+            this.label2.Size = new System.Drawing.Size(466, 29);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Library Management System | Main Form";
+            this.label2.Text = "Library Management System | Kelompok 6";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
@@ -242,6 +242,7 @@
             // issuedBooks1
             // 
             this.issuedBooks1.Location = new System.Drawing.Point(343, 55);
+            this.issuedBooks1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.issuedBooks1.Name = "issuedBooks1";
             this.issuedBooks1.Size = new System.Drawing.Size(1207, 795);
             this.issuedBooks1.TabIndex = 3;
@@ -249,6 +250,7 @@
             // addBooks1
             // 
             this.addBooks1.Location = new System.Drawing.Point(343, 55);
+            this.addBooks1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addBooks1.Name = "addBooks1";
             this.addBooks1.Size = new System.Drawing.Size(1207, 795);
             this.addBooks1.TabIndex = 4;
